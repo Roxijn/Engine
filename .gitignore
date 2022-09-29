@@ -1,0 +1,9 @@
+# IDEs
+.vs
+.vscode
+
+# Binaries
+*.exe
+*.dll
+[Bb]in
+[Oo]bj
