@@ -6,7 +6,12 @@ public class Generator : Generator<Frame> { }
 
 public class Generator<T> : IEnumerable<T> where T : new()
 {
-    public Boolean Running { get; set; } = false;
+    /// <summary>
+    /// True when the generator is generating new objects
+    /// Can be set to false to stop the generator
+    /// </summary>
+    public Boolean Running { get => running; set => running &= value; }
+    private Boolean running = false;
 
     IEnumerator IEnumerable.GetEnumerator()
     {
@@ -16,6 +21,6 @@ public class Generator<T> : IEnumerable<T> where T : new()
     public IEnumerator<T> GetEnumerator()
     {
         Running = true;
-        while (Running) yield return new T();
+        while (running) yield return new T();
     }
 }
