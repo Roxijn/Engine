@@ -1,84 +1,88 @@
-﻿using System.ComponentModel;
+﻿using System.Collections;
+using System.ComponentModel;
+using System.Runtime.InteropServices;
 
 namespace Roxijn.Numerics;
 
 public static partial class Vector
 {
-    public readonly struct Two
+    [StructLayout(LayoutKind.Sequential)]
+    public readonly struct Two : IEnumerable<float>
     {
+        #region Fields
+        public readonly float x, y;
+        #endregion
+
         #region Constructors
-        public Two(Single X = 0, Single Y = 0)
+        public Two(float s = 0) : this(s, s) { }
+
+        public Two(float x, float y)
         {
-            this.X = X; this.Y = Y;
+            this.x = x; this.y = y;
+        }
+        #endregion
+
+        #region IEnumerable
+        public IEnumerator<float> GetEnumerator()
+        {
+            yield return x;
+            yield return y;
         }
 
-        public Single X { get; init; }
-        public Single Y { get; init; }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         #endregion
 
         #region Operators
-        public static Two operator +(Two v) => new Two(+v.X, +v.Y);
-        public static Two operator +(Two a, Two b) => new Two(a.X + b.X, a.Y + b.Y);
+        public static Two operator +(Two v) => new Two(+v.x, +v.y);
+        public static Two operator +(Two a, Two b) => new Two(a.x + b.x, a.y + b.y);
 
-        public static Two operator -(Two v) => new Two(-v.X, -v.Y);
-        public static Two operator -(Two a, Two b) => new Two(a.X - b.X, a.Y - b.Y);
+        public static Two operator -(Two v) => new Two(-v.x, -v.y);
+        public static Two operator -(Two a, Two b) => new Two(a.x - b.x, a.y - b.y);
 
-        public static Two operator *(Two a, Two b) => new Two(a.X * b.X, a.Y * b.Y);
-        public static Two operator *(Two a, Single b) => new Two(a.X * b, a.Y * b);
-        public static Two operator *(Single a, Two b) => new Two(a * b.X, a * b.Y);
+        public static Two operator *(Two a, Two b) => new Two(a.x * b.x, a.y * b.y);
+        public static Two operator *(Two a, float b) => new Two(a.x * b, a.y * b);
+        public static Two operator *(float a, Two b) => new Two(a * b.x, a * b.y);
 
-        public static Two operator /(Two a, Two b) => new Two(a.X / b.X, a.Y / b.Y);
-        public static Two operator /(Two a, Single b) => new Two(a.X / b, a.Y / b);
-        public static Two operator /(Single a, Two b) => new Two(a / b.X, a / b.Y);
+        public static Two operator /(Two a, Two b) => new Two(a.x / b.x, a.y / b.y);
+        public static Two operator /(Two a, float b) => new Two(a.x / b, a.y / b);
+        public static Two operator /(float a, Two b) => new Two(a / b.x, a / b.y);
 
-        public static Two operator %(Two a, Two b) => new Two(a.X % b.X, a.Y % b.Y);
-        public static Two operator %(Single a, Two b) => new Two(a % b.X, a% b.Y);
-        public static Two operator %(Two a, Single b) => new Two(a.X % b, a.Y % b);
+        public static Two operator %(Two a, Two b) => new Two(a.x % b.x, a.y % b.y);
+        public static Two operator %(Two a, float b) => new Two(a.x % b, a.y % b);
+        public static Two operator %(float a, Two b) => new Two(a % b.x, a % b.y);
         #endregion
 
         #region Swizzles
-        [EditorBrowsable(EditorBrowsableState.Never)] public Two XX { get => new Two(X, X); }
-        [EditorBrowsable(EditorBrowsableState.Never)] public Two XY { get => new Two(X, Y); }
-        [EditorBrowsable(EditorBrowsableState.Never)] public Two YX { get => new Two(Y, X); }
-        [EditorBrowsable(EditorBrowsableState.Never)] public Two YY { get => new Two(Y, Y); }
+        [EditorBrowsable(EditorBrowsableState.Never)] public Two xx { get => new Two(x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)] public Two xy { get => new Two(x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)] public Two yx { get => new Two(y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)] public Two yy { get => new Two(y, y); }
 
-        [EditorBrowsable(EditorBrowsableState.Never)] public Three XXX { get => new Three(X, X, X); }
-        [EditorBrowsable(EditorBrowsableState.Never)] public Three XXY { get => new Three(X, X, Y); }
-        [EditorBrowsable(EditorBrowsableState.Never)] public Three XYX { get => new Three(X, Y, X); }
-        [EditorBrowsable(EditorBrowsableState.Never)] public Three XYY { get => new Three(X, Y, Y); }
-        [EditorBrowsable(EditorBrowsableState.Never)] public Three YXX { get => new Three(Y, X, X); }
-        [EditorBrowsable(EditorBrowsableState.Never)] public Three YXY { get => new Three(Y, X, Y); }
-        [EditorBrowsable(EditorBrowsableState.Never)] public Three YYX { get => new Three(Y, Y, X); }
-        [EditorBrowsable(EditorBrowsableState.Never)] public Three YYY { get => new Three(Y, Y, Y); }
+        [EditorBrowsable(EditorBrowsableState.Never)] public Three xxx { get => new Three(x, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)] public Three xxy { get => new Three(x, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)] public Three xyx { get => new Three(x, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)] public Three xyy { get => new Three(x, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)] public Three yxx { get => new Three(y, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)] public Three yxy { get => new Three(y, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)] public Three yyx { get => new Three(y, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)] public Three yyy { get => new Three(y, y, y); }
 
-        [EditorBrowsable(EditorBrowsableState.Never)] public Four XXXX { get => new Four(X, X, X, X); }
-        [EditorBrowsable(EditorBrowsableState.Never)] public Four XXXY { get => new Four(X, X, X, Y); }
-        [EditorBrowsable(EditorBrowsableState.Never)] public Four XXYX { get => new Four(X, X, Y, X); }
-        [EditorBrowsable(EditorBrowsableState.Never)] public Four XXYY { get => new Four(X, X, Y, Y); }
-        [EditorBrowsable(EditorBrowsableState.Never)] public Four XYXX { get => new Four(X, Y, X, X); }
-        [EditorBrowsable(EditorBrowsableState.Never)] public Four XYXY { get => new Four(X, Y, X, Y); }
-        [EditorBrowsable(EditorBrowsableState.Never)] public Four XYYX { get => new Four(X, Y, Y, X); }
-        [EditorBrowsable(EditorBrowsableState.Never)] public Four XYYY { get => new Four(X, Y, Y, Y); }
-        [EditorBrowsable(EditorBrowsableState.Never)] public Four YXXX { get => new Four(Y, X, X, X); }
-        [EditorBrowsable(EditorBrowsableState.Never)] public Four YXXY { get => new Four(Y, X, X, Y); }
-        [EditorBrowsable(EditorBrowsableState.Never)] public Four YXYX { get => new Four(Y, X, Y, X); }
-        [EditorBrowsable(EditorBrowsableState.Never)] public Four YXYY { get => new Four(Y, X, Y, Y); }
-        [EditorBrowsable(EditorBrowsableState.Never)] public Four YYXX { get => new Four(Y, Y, X, X); }
-        [EditorBrowsable(EditorBrowsableState.Never)] public Four YYXY { get => new Four(Y, Y, X, Y); }
-        [EditorBrowsable(EditorBrowsableState.Never)] public Four YYYX { get => new Four(Y, Y, Y, X); }
-        [EditorBrowsable(EditorBrowsableState.Never)] public Four YYYY { get => new Four(Y, Y, Y, Y); }
+        [EditorBrowsable(EditorBrowsableState.Never)] public Four xxxx { get => new Four(x, x, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)] public Four xxxy { get => new Four(x, x, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)] public Four xxyx { get => new Four(x, x, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)] public Four xxyy { get => new Four(x, x, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)] public Four xyxx { get => new Four(x, y, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)] public Four xyxy { get => new Four(x, y, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)] public Four xyyx { get => new Four(x, y, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)] public Four xyyy { get => new Four(x, y, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)] public Four yxxx { get => new Four(y, x, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)] public Four yxxy { get => new Four(y, x, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)] public Four yxyx { get => new Four(y, x, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)] public Four yxyy { get => new Four(y, x, y, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)] public Four yyxx { get => new Four(y, y, x, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)] public Four yyxy { get => new Four(y, y, x, y); }
+        [EditorBrowsable(EditorBrowsableState.Never)] public Four yyyx { get => new Four(y, y, y, x); }
+        [EditorBrowsable(EditorBrowsableState.Never)] public Four yyyy { get => new Four(y, y, y, y); }
         #endregion
     }
-
-    public static Two Abs(this Two v) => new Two(MathF.Abs(v.X), MathF.Abs(v.Y));
-    public static Two Ceiling(this Two v) => new Two(MathF.Ceiling(v.X), MathF.Ceiling(v.Y));
-    public static Single Dot(this Two a, Two b) => a.X * b.X + a.Y * b.Y;
-    public static Two Floor(this Two v) => new Two(MathF.Floor(v.X), MathF.Floor(v.Y));
-    public static Two Lerp(this Two a, Two b, Single w) => a + (b - a) * w;
-    public static Single Magnitude(this Two v) => MathF.Sqrt(SquareMagnitude(v));
-    private static Two Reflect(Two v, Two n) => 2 * Dot(v, n) * n - v;
-    public static Two Round(this Two v) => new Two(MathF.Round(v.X), MathF.Round(v.Y));
-    public static Two Sign(this Two v) => new Two(MathF.Sign(v.X), MathF.Sign(v.Y));
-    public static Single SquareMagnitude(this Two v) => Dot(v, v);
-    public static Two Unit(this Two v) => v / Magnitude(v);
 }
