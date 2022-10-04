@@ -14,7 +14,9 @@ public static partial class Vector
         #endregion
 
         #region Constructors
-        public Three(float s = 0) : this(s, s, s) { }
+        public Three() : this(0) { }
+        
+        public Three(float s) : this(s, s, s) { }
 
         public Three(float x, float y, float z)
         {

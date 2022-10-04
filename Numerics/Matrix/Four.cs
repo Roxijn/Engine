@@ -16,7 +16,9 @@ public static partial class Matrix
         #endregion
 
         #region Constructors
-        public Four(float s = 1) : this(
+        public Four() : this(1) { }
+
+        public Four(float s) : this(
             s, 0, 0, 0,
             0, s, 0, 0,
             0, 0, s, 0,

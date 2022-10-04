@@ -14,15 +14,17 @@ public static partial class Matrix
         #endregion
 
         #region Constructors
-        public Two(float S = 1) : this(
+        public Two() : this(1) { }
+
+        public Two(float S) : this(
             S, 0,
             0, S
         )
         { }
 
         public Two(
-            float A = 1, float B = 0,
-            float C = 0, float D = 1
+            float A, float B,
+            float C, float D
         )
         {
             this.a = A; this.b = B;

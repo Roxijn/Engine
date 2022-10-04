@@ -14,7 +14,9 @@ public static partial class Vector
         #endregion
 
         #region Constructors
-        public Four(float s = 0) : this(s, s, s, s) { }
+        public Four() : this(0) { }
+
+        public Four(float s) : this(s, s, s, s) { }
 
         public Four(float w, float x, float y, float z)
         {
