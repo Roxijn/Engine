@@ -13,13 +13,12 @@ public class Application
     public Engine Engine { get; private set; }
     public Generator Generator { get; private set; }
 
-    public void Start()
-    {
-        Engine.Loop();
-    }
+    /// <summary>
+    /// Starts the application
+    /// 
+    /// Once started, Start will not return
+    /// </summary>
+    public void Start() => Engine.Loop();
 
-    public void Stop()
-    {
-        Generator.Running = false;
-    }
+    public void Stop() => Generator.Running = false;
 }
