@@ -30,7 +30,7 @@ public static partial class Math
 
     public static double Ceil(double x) => System.Math.Ceiling(x);
     public static float Ceil(float x) => System.MathF.Ceiling(x);
-   
+
     public static double Clamp(double x, double min, double max) => System.Math.Clamp(x, min, max);
     public static float Clamp(float x, float min, float max) => System.Math.Clamp(x, min, max);
 
