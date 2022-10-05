@@ -1,24 +1,25 @@
 ﻿namespace Roxijn.Core;
 
-public class Application
+public class Application : Base.Application
 {
     public Application()
     {
-        Engine = new Engine();
-        Generator = new Generator();
-
-        Engine.Generator = Generator;
+        engine = new Engine();
+        generator = new Generator();
+        engine.generator = generator;
     }
 
-    public Engine Engine { get; private set; }
-    public Generator Generator { get; private set; }
+    public Engine engine;
+    public Generator generator;
 
     /// <summary>
     /// Starts the application
-    /// 
     /// Once started, Start will not return
     /// </summary>
-    public void Start() => Engine.Loop();
+    public void Start() => engine.Loop();
 
-    public void Stop() => Generator.Running = false;
+    /// <summary>
+    /// Stops the application
+    /// </summary>
+    public void Stop() => generator.Running = false;
 }
