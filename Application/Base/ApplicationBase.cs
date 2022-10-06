@@ -1,10 +1,10 @@
 ﻿using static Glfw;
 
-namespace Roxijn.Core.Base;
+namespace Roxijn.Application.Base;
 
-public abstract class Application : IDisposable
+public abstract class ApplicationBase : IDisposable
 {
-    public Application()
+    public ApplicationBase()
     {
         if (glfwInit() == GLFW_FALSE) throw new Exception("Glfw failed init");
     }
@@ -13,8 +13,4 @@ public abstract class Application : IDisposable
     {
         glfwTerminate();
     }
-
-    public abstract void Start();
-
-    public abstract void Stop();
 }

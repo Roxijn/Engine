@@ -5,7 +5,7 @@ namespace Roxijn.Core.Base;
 /// <summary>
 /// Abstracts away glfw timer,
 /// </summary>
-public abstract class Time
+public abstract class TimeBase
 {
     /// <summary>
     /// The number of ticks per second.

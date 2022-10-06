@@ -2,4 +2,4 @@ using System.Collections;
 
 namespace Roxijn.Core;
 
-public class Generator : Base.Generator<Frame> { }
+public class Generator : Base.GeneratorBase<Frame> { }

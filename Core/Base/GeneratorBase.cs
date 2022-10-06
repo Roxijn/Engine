@@ -9,7 +9,7 @@ namespace Roxijn.Core.Base;
 /// passed into the scene structure in the main loop.
 /// </summary>
 /// <typeparam name="T">The type to generate</typeparam>
-public class Generator<T> : IEnumerable<T> where T : new()
+public class GeneratorBase<T> : IEnumerable<T> where T : new()
 {
     private Boolean running = false;
 

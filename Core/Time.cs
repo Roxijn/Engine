@@ -5,7 +5,7 @@
 /// The first values for Delta and Elapsed are always 0.
 /// After that their values are relative to whenever Cycle() is called
 /// </summary>
-public abstract class Time : Base.Time
+public abstract class Time : Base.TimeBase
 {
     static Time()
     {
