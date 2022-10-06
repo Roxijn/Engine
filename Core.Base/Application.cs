@@ -9,8 +9,6 @@ public abstract class Application : IDisposable
         if (glfwInit() == GLFW_FALSE) throw new Exception("Glfw failed init");
     }
 
-    private GLFWwindow window;
-
     public void Dispose()
     {
         glfwTerminate();

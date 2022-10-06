@@ -1,4 +1,6 @@
-﻿namespace Roxijn.Core;
+﻿using Roxijn.Core.Base;
+
+namespace Roxijn.Core;
 
 public class Application : Base.Application
 {
