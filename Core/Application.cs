@@ -16,10 +16,10 @@ public class Application : Base.Application
     /// Starts the application
     /// Once started, Start will not return
     /// </summary>
-    public void Start() => engine.Loop();
+    public override void Start() => engine.Loop();
 
     /// <summary>
     /// Stops the application
     /// </summary>
-    public void Stop() => generator.Running = false;
+    public override void Stop() => generator.Running = false;
 }

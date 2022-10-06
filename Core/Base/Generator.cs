@@ -2,6 +2,13 @@ using System.Collections;
 
 namespace Roxijn.Core.Base;
 
+/// <summary>
+/// Enumerates forever until Running is set to false.
+/// Each yield creates a new T.
+/// This is used to generate a frame structure to be
+/// passed into the scene structure in the main loop.
+/// </summary>
+/// <typeparam name="T">The type to generate</typeparam>
 public class Generator<T> : IEnumerable<T> where T : new()
 {
     private Boolean running = false;

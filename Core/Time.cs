@@ -1,7 +1,9 @@
 ﻿namespace Roxijn.Core;
 
 /// <summary>
-/// Keeps track of time
+/// Keeps track of time.
+/// The first values for Delta and Elapsed are always 0.
+/// After that their values are relative to whenever Cycle() is called
 /// </summary>
 public abstract class Time : Base.Time
 {
@@ -18,10 +20,10 @@ public abstract class Time : Base.Time
     /// <summary>
     /// Updates previous and current values in frame.
     /// </summary>
-    internal static void Cycle() => frame = frame.current == 0 ? (Epoch, Epoch) : (frame.current, Ticks);
+    internal static void Cycle() => frame = frame.current != 0 ? (frame.current, Ticks) : (Epoch, Epoch);
 
     /// <summary>
-    /// Keeps track of the ticks between frames.
+    /// Keeps track of calls to Cycle.
     /// </summary>
     static (ulong previous, ulong current) frame;
 
